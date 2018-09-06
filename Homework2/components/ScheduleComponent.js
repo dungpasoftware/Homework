@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image, Dimensions } from 'react-native'
+import { Text, View, Dimensions } from 'react-native'
 import NameAndImage from './NameAndImage'
 var screen = Dimensions.get('window')
 export default class ScheduleComponent extends Component {
@@ -15,11 +15,11 @@ export default class ScheduleComponent extends Component {
                     flexDirection: 'column'
                 }}
             >
-                <Text style={{ fontWeight: 'bold', alignSelf: 'center', marginTop: 5 }}> {this.props.time} </Text>
+                <Text style={{ fontWeight: 'bold', alignSelf: 'center', marginTop: 5 }}> {this.props.schedule.time} </Text>
 
                 <View style={{ flexDirection: 'row', marginTop: 10, flex: 1 }}>
-                    <NameAndImage object={this.props.object1} direction='row'></NameAndImage>
-                    <NameAndImage object={this.props.object2} direction='row-reverse'></NameAndImage>
+                    <NameAndImage name={this.props.schedule.name[0]} avt={this.props.schedule.imageUrl[0]} direction='row'></NameAndImage>
+                    <NameAndImage name={this.props.schedule.name[1]} avt={this.props.schedule.imageUrl[1]} direction='row-reverse'></NameAndImage>
 
                 </View>
 

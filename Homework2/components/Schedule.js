@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, Image, Dimensions } from 'react-native'
-import dataObject from '../data/dataObject'
+import { Text, View, Image, Dimensions, FlatList } from 'react-native'
+import { data } from '../data/data.json'
 import ScheduleComponent from './ScheduleComponent'
 
-
-
-
 export default class Schedule extends Component {
+    renderItem = ({ item }) => <ScheduleComponent schedule={item} />
     render() {
         return (
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', backgroundColor: 'rgb(0, 220, 0)' }}>
@@ -24,10 +22,13 @@ export default class Schedule extends Component {
                     style={{ fontWeight: 'bold', fontSize: 20, color: 'yellow', marginTop: 10, marginBottom: 30 }}
                 >Street Fighter V</Text>
 
+                <FlatList
+                    data={data}
+                    renderItem={this.renderItem}
+                    keyExtractor={(item, index) => item.id}
+                />
 
-                <ScheduleComponent object1={dataObject[0]} object2={dataObject[1]} time="Feb 31 2018 - 25:00" />
-                <ScheduleComponent object1={dataObject[2]} object2={dataObject[3]} time="Feb 31 2018 - 25:00" />
-                <ScheduleComponent object1={dataObject[4]} object2={dataObject[5]} time="Feb 31 2018 - 25:00" />
+
             </View>
         )
     }
