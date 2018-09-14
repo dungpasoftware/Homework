@@ -35,9 +35,9 @@ const Navigation = createStackNavigator({
 export default class App extends Component {
   render() {
     return (
-      <View style={{ backgroundColor: '#ffe6f2', flex: 1 }}>
-        <Navigation />
-      </View>
+
+      <Navigation />
+
     );
   }
 }

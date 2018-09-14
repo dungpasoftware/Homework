@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "text": "Find Player",
+            "uriImage": "https://www.hurricanes.co.nz/fileadmin/images/Players/01_img_hero_player_generic.png",
+            "screen": "Find"
+        },
+        {
+            "text": "List Hero",
+            "uriImage": "https://vignette.wikia.nocookie.net/inazuma-eleven-fanon/images/f/f6/Sword_game_icon_by_inkedicon-d5bpr6l.png/revision/latest?cb=20130602104325",
+            "screen": "ListHero"
+        },
+        {
+            "text": "Top Player",
+            "uriImage": "https://cdn4.iconfinder.com/data/icons/we-re-the-best/512/best-badge-cup-gold-medal-game-win-winner-gamification-first-award-acknowledge-acknowledgement-prize-victory-reward-conquest-premium-rank-ranking-gold-hero-star-quality-challenge-trophy-praise-victory-success-512.png",
+            "screen": "ProPlayerList"
+        }
+    ]
+}

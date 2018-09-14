@@ -6,7 +6,7 @@ export default class CakeDetailScreen extends Component {
     render() {
         const cakeData = this.props.navigation.getParam('cakeData');
         return (
-            <View>
+            <View style={{ backgroundColor: 'pink', flex: 1 }}>
                 <CakeView cake={cakeData} />
                 <FlatList
                     style={styles.listCakeView}

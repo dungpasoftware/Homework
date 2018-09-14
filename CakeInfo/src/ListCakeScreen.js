@@ -11,11 +11,13 @@ export default class ListCake extends Component {
 
     render() {
         return (
-            <FlatList
-                data={data}
-                renderItem={this.renderItem}
-                keyExtractor={(item) => item.type}
-            />
+            <View style={{ backgroundColor: 'pink', flex: 1 }}>
+                <FlatList
+                    data={data}
+                    renderItem={this.renderItem}
+                    keyExtractor={(item) => item.type}
+                />
+            </View>
         )
     }
 }
