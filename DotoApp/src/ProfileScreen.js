@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image, Button, Dimensions } from 'react-native'
 import axios from 'axios'
 
-const wl = null
+
 export default class ProfileScreen extends Component {
 
-
+    state = {
+        win: 0,
+        lose: 0
+    }
     takeWL(player) {
         axios.get(`https://api.opendota.com/api/players/${player.account_id}/wl`)
             .then((response) => {
-                console.log(response.data)
+                this.setState({ win: response.data.win, lose: response.data.lose })
             })
             .catch((error) => {
                 console.log(error);
@@ -33,12 +36,19 @@ export default class ProfileScreen extends Component {
                     </View>
                 </View>
                 <Text style={{ fontSize: 18, color: 'blue', margin: 10 }}>Steam ID: {player.steamid}</Text>
-                {/* <Text>Win: {wl.win}</Text>
-                <Text>Lose: {wl.lose}</Text> */}
+                <Text style={[styles.textWL, { color: 'green' }]}>Win: {this.state.win}</Text>
+                <Text style={[styles.textWL, { color: 'red' }]}>Lose: {this.state.lose}</Text>
             </View>
         )
     }
 
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    textWL: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        margin: 10
+
+    }
+})
