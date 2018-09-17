@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TextInput, Dimensions, ActivityIndicator, Image } from 'react-native'
+import { Text, StyleSheet, View, TextInput, Dimensions, ActivityIndicator, Image, Alert } from 'react-native'
 import Button from 'react-native-button'
 import ListWeathers from './ListWeathers';
 import axios from 'react-native-axios'
@@ -23,7 +23,13 @@ export default class App extends Component {
 
             })
             .catch((error) => {
-                console.log(error);
+                Alert.alert(
+                    'Error',
+                    'Cant found your location',
+                    [
+                        { text: 'Ok, Im Fine' }
+                    ]
+                )
             });
         return (
             <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#39354C', alignItems: 'center' }}>
