@@ -25,7 +25,7 @@ class ListAll extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{ flex: 1, backgroundColor: '#172025' }}>
                 <FlatList
                     data={this.state.data}
                     renderItem={this.renderItem}
@@ -37,6 +37,8 @@ class ListAll extends Component {
     }
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+})
 const mapStateToProps = ({ dataForList }) => ({ dataForList })
 export default connect(mapStateToProps)(ListAll)
