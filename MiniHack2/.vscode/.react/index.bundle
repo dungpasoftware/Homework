@@ -61359,7 +61359,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       navigationOptions: function navigationOptions(_ref) {
         var navigation = _ref.navigation;
         return {
-          title: "Converttable",
+          title: "Convertable",
           headerRight: _react3.default.createElement(
             _reactNative.TouchableOpacity,
             {
@@ -61580,7 +61580,14 @@ __d(function (global, _require, module, exports, _dependencyMap) {
         }
     });
 
-    exports.default = (0, _reactRedux.connect)(null, {
+    var mapStateToPropts = function mapStateToPropts(_ref2) {
+        var currentValue = _ref2.currentValue;
+        return {
+            currentValue: currentValue
+        };
+    };
+
+    exports.default = (0, _reactRedux.connect)(mapStateToPropts, {
         changeValue: _actions.changeValue
     })(Itemconvert);
 },492,[118,179,12,496,497],"src\\components\\Itemconvert.js");
@@ -61603,15 +61610,11 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
     var _reactNative = _require(_dependencyMap[2], "react-native");
 
-    var _data = _require(_dependencyMap[3], "../data.json");
-
-    var _data2 = _interopRequireDefault(_data);
-
-    var _Itemconvert = _require(_dependencyMap[4], "./Itemconvert.js");
+    var _Itemconvert = _require(_dependencyMap[3], "./Itemconvert.js");
 
     var _Itemconvert2 = _interopRequireDefault(_Itemconvert);
 
-    var _reactRedux = _require(_dependencyMap[5], "react-redux");
+    var _reactRedux = _require(_dependencyMap[4], "react-redux");
 
     function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61656,7 +61659,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     type: "left",
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 21
+                        lineNumber: 22
                     }
                 });
             };
@@ -61667,14 +61670,15 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     type: "right",
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 22
+                        lineNumber: 23
                     }
                 });
             };
 
             _this.state = {
                 textLeft: 0,
-                textRight: 0
+                textRight: 0,
+                changeLeft: true
             };
             return _this;
         }
@@ -61684,10 +61688,9 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             value: function render() {
                 var _this2 = this;
 
-                console.log(this.props.currentValue);
-                var resutltR = parseInt(this.state.textRight) * this.props.currentValue.left / this.props.currentValue.right;
-                var resutltL = parseInt(this.state.textLeft) * this.props.currentValue.right / this.props.currentValue.left;
-                console.log(resutltR);
+                data = this.props.currentData;
+                var resutltR = parseInt(this.state.textLeft) * this.props.currentValue.left / this.props.currentValue.right;
+                var resutltL = parseInt(this.state.textRight) * this.props.currentValue.right / this.props.currentValue.left;
                 return _react3.default.createElement(
                     _reactNative.View,
                     {
@@ -61696,7 +61699,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                         },
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 32
+                            lineNumber: 33
                         }
                     },
                     _react3.default.createElement(
@@ -61704,31 +61707,32 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                         {
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 33
+                                lineNumber: 34
                             }
                         },
                         _react3.default.createElement(_reactNative.TextInput, {
                             style: styles.txtInStyle,
                             onChangeText: function onChangeText(text) {
                                 return _this2.setState({
-                                    textRight: parseInt(text)
+                                    textLeft: text === '' ? 0 : parseFloat(text),
+                                    changeLeft: true
                                 });
                             },
-                            value: resutltL.toString(),
+                            value: this.state.changeLeft ? this.state.textLeft.toString() : resutltL.toString(),
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 34
+                                lineNumber: 35
                             }
                         }),
                         _react3.default.createElement(_reactNative.FlatList, {
-                            data: _data2.default.lenght,
+                            data: data,
                             renderItem: this.renderItem1,
                             keyExtractor: function keyExtractor(item) {
                                 return item.value;
                             },
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 42
+                                lineNumber: 44
                             }
                         })
                     ),
@@ -61737,31 +61741,32 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                         {
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 48
+                                lineNumber: 50
                             }
                         },
                         _react3.default.createElement(_reactNative.TextInput, {
                             style: styles.txtInStyle,
                             onChangeText: function onChangeText(text) {
                                 return _this2.setState({
-                                    textLeft: parseInt(text)
+                                    textRight: text === '' ? 0 : parseInt(text),
+                                    changeLeft: false
                                 });
                             },
-                            value: resutltR.toString(),
+                            value: this.state.changeLeft ? resutltR.toString() : this.state.textRight.toString(),
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 49
+                                lineNumber: 51
                             }
                         }),
                         _react3.default.createElement(_reactNative.FlatList, {
-                            data: _data2.default.lenght,
+                            data: data,
                             renderItem: this.renderItem2,
                             keyExtractor: function keyExtractor(item) {
                                 return item.value;
                             },
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 54
+                                lineNumber: 60
                             }
                         })
                     )
@@ -61781,14 +61786,16 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     });
 
     var mapStateToPropts = function mapStateToPropts(_ref) {
-        var currentValue = _ref.currentValue;
+        var currentValue = _ref.currentValue,
+            currentData = _ref.currentData;
         return {
-            currentValue: currentValue
+            currentValue: currentValue,
+            currentData: currentData
         };
     };
 
     exports.default = (0, _reactRedux.connect)(mapStateToPropts)(FirstScreen);
-},493,[118,179,12,494,492,496],"src\\components\\FirstScreen.js");
+},493,[118,179,12,492,496],"src\\components\\FirstScreen.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
     module.exports = {
         "lenght": [{
@@ -61860,7 +61867,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.changeValue = undefined;
+    exports.fillData = exports.changeValue = undefined;
 
     var _type = _require(_dependencyMap[0], "./type");
 
@@ -61868,6 +61875,13 @@ __d(function (global, _require, module, exports, _dependencyMap) {
         return {
             type: _type.CHANGE_VALUE,
             payload: data
+        };
+    };
+
+    var fillData = exports.fillData = function fillData(bigdata) {
+        return {
+            type: _type.FILL_DATA,
+            payload: bigdata
         };
     };
 },497,[501],"src\\actions\\index.js");
@@ -62427,6 +62441,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     value: true
   });
   var CHANGE_VALUE = exports.CHANGE_VALUE = 'change_value';
+  var FILL_DATA = exports.FILL_DATA = 'fill_data';
 },501,[],"src\\actions\\type.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   'use strict';
@@ -63595,12 +63610,17 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
     var _ValueReducer2 = _interopRequireDefault(_ValueReducer);
 
+    var _DataReducer = _require(_dependencyMap[2], "./DataReducer");
+
+    var _DataReducer2 = _interopRequireDefault(_DataReducer);
+
     function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
     exports.default = (0, _redux.combineReducers)({
-        currentValue: _ValueReducer2.default
+        currentValue: _ValueReducer2.default,
+        currentData: _DataReducer2.default
     });
-},520,[514,522],"src\\reducers\\index.js");
+},520,[514,522,639],"src\\reducers\\index.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   module.exports = {
     get createNavigationContainer() {
@@ -81864,6 +81884,14 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
     var _reactNative = _require(_dependencyMap[2], "react-native");
 
+    var _actions = _require(_dependencyMap[3], "../actions");
+
+    var _reactRedux = _require(_dependencyMap[4], "react-redux");
+
+    var _data = _require(_dependencyMap[5], "../data.json");
+
+    var _data2 = _interopRequireDefault(_data);
+
     function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81903,23 +81931,69 @@ __d(function (global, _require, module, exports, _dependencyMap) {
         _createClass(TypeScreen, [{
             key: "render",
             value: function render() {
+                var _this2 = this;
+
                 return _react3.default.createElement(
                     _reactNative.View,
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 7
+                            lineNumber: 10
                         }
                     },
                     _react3.default.createElement(
-                        _reactNative.Text,
+                        _reactNative.TouchableOpacity,
                         {
+                            style: {
+                                backgroundColor: 'yellow'
+                            },
+                            onPress: function onPress() {
+                                _this2.props.navigation.navigate("ConvertScreen");
+
+                                _this2.props.fillData(_data2.default.lenght);
+                            },
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 8
+                                lineNumber: 11
                             }
                         },
-                        " textInComponent "
+                        _react3.default.createElement(
+                            _reactNative.Text,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 17
+                                }
+                            },
+                            "Lenght"
+                        )
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        {
+                            style: {
+                                backgroundColor: 'orange'
+                            },
+                            onPress: function onPress() {
+                                _this2.props.navigation.navigate("ConvertScreen");
+
+                                _this2.props.fillData(_data2.default.weight);
+                            },
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 20
+                            }
+                        },
+                        _react3.default.createElement(
+                            _reactNative.Text,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 26
+                                }
+                            },
+                            "Weight"
+                        )
                     )
                 );
             }
@@ -81928,10 +82002,38 @@ __d(function (global, _require, module, exports, _dependencyMap) {
         return TypeScreen;
     }(_react2.Component));
 
-    exports.default = TypeScreen;
-
     var styles = _reactNative.StyleSheet.create({});
-},638,[118,179,12],"src\\containers\\TypeScreen.js");
+
+    exports.default = (0, _reactRedux.connect)(null, {
+        fillData: _actions.fillData
+    })(TypeScreen);
+},638,[118,179,12,497,496,494],"src\\containers\\TypeScreen.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+
+    exports.default = function () {
+        var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _data2.default.lenght;
+        var action = arguments[1];
+
+        switch (action.type) {
+            case _type.FILL_DATA:
+                return action.payload;
+
+            default:
+                return value;
+        }
+    };
+
+    var _type = _require(_dependencyMap[0], "../actions/type");
+
+    var _data = _require(_dependencyMap[1], "../data.json");
+
+    var _data2 = _interopRequireDefault(_data);
+
+    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},639,[501,494],"src\\reducers\\DataReducer.js");
 require(44);
 require(11);
 //# sourceMappingURL=index.map

@@ -41,4 +41,5 @@ const styles = StyleSheet.create({
     },
 
 })
-export default connect(null, { changeValue })(Itemconvert)
+const mapStateToPropts = ({ currentValue }) => ({ currentValue });
+export default connect(mapStateToPropts, { changeValue })(Itemconvert)
