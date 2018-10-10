@@ -1,0 +1,46 @@
+{
+    "lenght": [
+        {
+            "value": 1,
+            "name": "minimet",
+            "color": "orange"
+        },
+        {
+            "value": 10,
+            "name": "centimet",
+            "color": "yellow"
+        },
+        {
+            "value": 100,
+            "name": "decimet",
+            "color": "orange"
+        },
+        {
+            "value": 10000,
+            "name": "met",
+            "color": "yellow"
+        }
+    ],
+    "weight": [
+        {
+            "value": 1,
+            "name": "mimigam",
+            "color": "orange"
+        },
+        {
+            "value": 10,
+            "name": "centigam",
+            "color": "yellow"
+        },
+        {
+            "value": 100,
+            "name": "deciga",
+            "color": "orange"
+        },
+        {
+            "value": 10000,
+            "name": "gam",
+            "color": "yellow"
+        }
+    ]
+}
