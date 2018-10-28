@@ -5,12 +5,12 @@ import firebase from 'react-native-firebase'
 export default class LoginWithFacebook extends Component {
     fbAuth = () => {
         console.log('an lon roi')
-        LoginManager.logInWithReadPermissions(['public_profile'])
+        LoginManager.logInWithReadPermissions(['public_profile', 'email'])
             .then((result) => {
                 if (result.isCancelled) {
                     console.log("Login was cancelled")
                 } else {
-                    console.log('Login was a success' + result.grantedPermissions.toString)
+                    console.log(result)
                 }
             })
     }
