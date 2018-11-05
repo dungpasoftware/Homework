@@ -10,7 +10,7 @@ class AmountItem extends Component {
         return (
             <View>
                 <Icon name={this.props.iconName} size={25} color={this.props.tintColor} />
-                {this.props.routeName === 'Order' && this.props.orders.reduce((total, order, index, orders) => { return total += order.amount }, 0) != 0 &&
+                {this.props.routeName === 'Order' && this.props.orders.length != 0 &&
                     <View style={{
                         position: 'absolute',
                         backgroundColor: primaryColorRed,

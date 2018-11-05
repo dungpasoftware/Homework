@@ -21,7 +21,7 @@ export default class TabMenu extends Component {
         firebase.database().ref(`dishes/${this.state.currentCategory}`)
             .on('value', res =>
 
-                this.setState({ dishes: res._value }, () => console.log(this.state.dishes))
+                this.setState({ dishes: res._value })
             )
 
     }

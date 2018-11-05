@@ -3,7 +3,8 @@ import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native
 import OrderItem from '../components/OrderItem';
 import { connect } from 'react-redux'
 import { commonStyles, primaryColorBrown, primaryColorRed } from '../styles'
-
+import firebase from 'react-native-firebase'
+import { cleanOrder } from '../actions'
 
 
 
@@ -23,7 +24,7 @@ class TabOrder extends Component {
         <FlatList
             style={{ flexGrow: 0 }}
             data={this.props.orders}
-            renderItem={({ item }) => <OrderItem item={item} />}
+            renderItem={({ item }) => <OrderItem item={item} historyMode={false} />}
             keyExtractor={item => item.name}
         />
     )
@@ -61,6 +62,16 @@ class TabOrder extends Component {
 
     confirmOrder = () => {
 
+        firebase.database().ref(`/users`)
+            .child(firebase.auth().currentUser.uid)
+            .child('history')
+            .push()
+            .set({
+                date: new Date().toDateString(),
+                onGoing: true,
+                orders: this.props.orders
+            })
+        this.props.cleanOrder()
     }
     render() {
 
@@ -80,4 +91,4 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = ({ orders }) => ({ orders })
-export default connect(mapStateToProps)(TabOrder)
+export default connect(mapStateToProps, { cleanOrder })(TabOrder)
