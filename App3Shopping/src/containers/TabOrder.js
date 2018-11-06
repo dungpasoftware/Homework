@@ -13,7 +13,7 @@ class TabOrder extends Component {
         super(props)
 
         this.state = {
-
+            data: []
         }
     }
 
@@ -29,7 +29,17 @@ class TabOrder extends Component {
         />
     )
 
+    componentWillMount() {
+        this.loadData()
 
+    }
+    loadData() {
+        firebase.database().ref(`/users`)
+            .child(firebase.auth().currentUser.uid)
+            .child('history')
+            .on('value', res => this.setState({ data: res._value == null ? [] : res._value }))
+
+    }
 
     renderTotal = () => (
         <View>
@@ -54,8 +64,9 @@ class TabOrder extends Component {
         </View>
     )
     renderConfirm = () =>
-        <TouchableOpacity style={[commonStyles.button, { alignSelf: "center", bottom: 16, position: 'absolute' }]}
+        <TouchableOpacity style={[commonStyles.button, { alignSelf: "center", bottom: 16, position: 'absolute', backgroundColor: this.props.orders.length === 0 ? 'gray' : primaryColorRed }]}
             onPress={this.confirmOrder}
+            disabled={this.props.orders.length === 0}
         >
             <Text style={{ color: 'white' }}>Confirm</Text>
         </TouchableOpacity>
@@ -65,13 +76,16 @@ class TabOrder extends Component {
         firebase.database().ref(`/users`)
             .child(firebase.auth().currentUser.uid)
             .child('history')
-            .push()
-            .set({
-                date: new Date().toDateString(),
-                onGoing: true,
-                orders: this.props.orders
-            })
+            .set([
+                ...this.state.data,
+                {
+                    date: new Date().toDateString(),
+                    onGoing: true,
+                    orders: this.props.orders
+                }
+            ])
         this.props.cleanOrder()
+        this.props.navigation.navigate('History')
     }
     render() {
 

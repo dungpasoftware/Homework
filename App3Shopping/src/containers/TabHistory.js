@@ -25,8 +25,8 @@ export default class TabHistory extends Component {
             .child(firebase.auth().currentUser.uid)
             .child('history')
             .on('value', res => this.setState({
-                onGoingHistory: res._value.filter(order => order.onGoing == true),
-                finishedHistory: res._value.filter(order => order.onGoing == false)
+                onGoingHistory: res._value != null ? res._value.filter(order => order.onGoing == true) : [],
+                finishedHistory: res._value != null ? res._value.filter(order => order.onGoing == false) : []
             }))
 
     }
